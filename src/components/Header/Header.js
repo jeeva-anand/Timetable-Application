@@ -14,7 +14,7 @@ import colors from './../../colors';
 
 const styleSheet = createStyleSheet('Header', {
   header: {
-    backgroundColor: colors.pinkDark,
+    backgroundColor: colors.blueGreyDarkest,
   },
   icon: {
     height: 27,

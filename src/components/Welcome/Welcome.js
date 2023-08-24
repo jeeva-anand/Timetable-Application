@@ -35,7 +35,7 @@ class Welcome extends Component {
               Welcome to Timetable Generator
             </Typography>
             <Typography type="body1" color="secondary">
-              An IEEE Project
+              
             </Typography>
             <hr />
             <br />
