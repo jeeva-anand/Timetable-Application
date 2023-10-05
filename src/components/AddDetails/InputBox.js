@@ -2,30 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 
-class InputBox extends React.Component {
-  constructor() {
+class InputBox extends React.Component
+{
+  constructor()
+  {
     super();
     this.createData = this.createData.bind(this);
   }
 
-  createData(event) {
+  createData(event)
+  {
     event.preventDefault();
     const data = {
       name: this.name.value,
     };
-    if (this.props.data === 'teachers') {
+    if (this.props.data === 'teachers')
+    {
       this.props.addTeacher(data);
-    } else {
+    } else
+    {
       this.props.addRoom(data);
     }
     this.inputForm.reset();
   }
 
-  render() {
+  render()
+  {
     let placeholderValue;
-    if (this.props.data === 'rooms') {
+    if (this.props.data === 'subjects')
+    {
       placeholderValue = 'Enter Room number';
-    } else {
+    } else
+    {
       placeholderValue = "Enter Teacher's name";
     }
 

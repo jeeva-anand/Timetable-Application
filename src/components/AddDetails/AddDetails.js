@@ -18,17 +18,19 @@ import { createStyleSheet, withStyles } from 'material-ui/styles';
 import RenderData from './RenderData';
 import InputBox from './InputBox';
 import base from '../../re-base';
-import colors from './../../colors';
+import colors from '../../colors';
 import './../AddTimeTable/react-table.css';
 import { emptyStarterTimeTable } from '../../constants';
 
-class AddTeacherRooms extends Component {
-  constructor(props) {
+class AddDetails extends Component
+{
+  constructor(props)
+  {
     super(props);
 
     this.state = {
       teachers: {},
-      rooms: {},
+      subjects: {},
       data: this.props.match.path.slice(1),
       dialogOpen: false,
       index: -1,
@@ -74,69 +76,81 @@ class AddTeacherRooms extends Component {
     ];
   }
 
-  componentWillMount = () => {
+  componentWillMount = () =>
+  {
     this.ref1 = base.syncState('teachers', {
       context: this,
       state: 'teachers',
     });
 
-    this.ref2 = base.syncState('rooms', {
+    this.ref2 = base.syncState('subjects', {
       context: this,
-      state: 'rooms',
+      state: 'subjects',
     });
 
     const localStorageRef = localStorage.getItem('data');
 
-    if (localStorageRef) {
+    if (localStorageRef)
+    {
       this.setState({
         teachers: JSON.parse(localStorageRef).teachers,
-        rooms: JSON.parse(localStorageRef).rooms,
+        subjects: JSON.parse(localStorageRef).subjects,
       });
     }
   };
 
-  componentWillUpdate = (nextProps, nextState) => {
+  componentWillUpdate = (nextProps, nextState) =>
+  {
     localStorage.setItem('data', JSON.stringify(nextState));
   };
 
-  componentWillUnmount = () => {
+  componentWillUnmount = () =>
+  {
     base.removeBinding(this.ref1.endpoint);
     base.removeBinding(this.ref2.endpoint);
   };
 
-  addTeacher = (data) => {
+  addTeacher = (data) =>
+  {
     const teachers = { ...this.state.teachers };
-    teachers[`teacher-${Date.now()}`] = data;
+    teachers[`teacher-${ Date.now() }`] = data;
     this.setState({ teachers });
   };
 
-  addRoom = (data) => {
-    const rooms = { ...this.state.rooms };
-    rooms[`room-${Date.now()}`] = data;
-    this.setState({ rooms });
+  addRoom = (data) =>
+  {
+    const subjects = { ...this.state.subjects };
+    subjects[`room-${ Date.now() }`] = data;
+    this.setState({ subjects });
   };
 
-  removeData = (key) => {
-    if (this.state.data === 'teachers') {
+  removeData = (key) =>
+  {
+    if (this.state.data === 'teachers')
+    {
       this.removeTeacher(key);
-    } else {
+    } else
+    {
       this.removeRoom(key);
     }
   };
 
-  removeTeacher = (key) => {
+  removeTeacher = (key) =>
+  {
     const teachers = { ...this.state.teachers };
     teachers[key] = null;
     this.setState({ teachers });
   };
 
-  removeRoom = (key) => {
-    const rooms = { ...this.state.rooms };
-    rooms[key] = null;
-    this.setState({ rooms });
+  removeRoom = (key) =>
+  {
+    const subjects = { ...this.state.subjects };
+    subjects[key] = null;
+    this.setState({ subjects });
   };
 
-  generateTT = (item, name) => {
+  generateTT = (item, name) =>
+  {
     const selector = item === 'teachers' ? 1 : 2;
     const selector2 = item === 'teachers' ? 2 : 1;
 
@@ -145,7 +159,8 @@ class AddTeacherRooms extends Component {
         context: this,
         asArray: true,
       })
-      .then((data) => {
+      .then((data) =>
+      {
         const generatedTT = [
           {
             sl1: ['', '', ''],
@@ -212,10 +227,14 @@ class AddTeacherRooms extends Component {
           },
         ];
 
-        data.forEach((timeTable) => {
-          timeTable.data.forEach((row, index) => {
-            Object.keys(row).forEach((keys) => {
-              if (row[keys][selector] === name) {
+        data.forEach((timeTable) =>
+        {
+          timeTable.data.forEach((row, index) =>
+          {
+            Object.keys(row).forEach((keys) =>
+            {
+              if (row[keys][selector] === name)
+              {
                 generatedTT[index][keys] = [
                   timeTable.classInfo,
                   row[keys][0],
@@ -234,27 +253,32 @@ class AddTeacherRooms extends Component {
       });
   };
 
-  dialogOpen = (index) => {
+  dialogOpen = (index) =>
+  {
     this.generateTT(this.state.data, this.state[this.state.data][index].name);
   };
 
-  dialogClose = () => {
+  dialogClose = () =>
+  {
     this.setState({ dialogOpen: false });
   };
 
   paperTitle = () =>
-    (this.state.data === 'teachers'
-      ? `Teacher's Name: ${this.state.index}`
-      : `Room Number: ${this.state.index}`);
+  (this.state.data === 'teachers'
+    ? `Teacher's Name: ${ this.state.index }`
+    : `Room Number: ${ this.state.index }`);
 
-  name = () => {
+  name = () =>
+  {
     let data;
-    const { teachers, rooms, index } = this.state;
+    const { teachers, subjects, index } = this.state;
     const value = this.state.data;
-    if (value === 'teachers') {
+    if (value === 'teachers')
+    {
       data = teachers[index];
-    } else {
-      data = rooms[index];
+    } else
+    {
+      data = subjects[index];
     }
     data = data || {
       name: '',
@@ -262,7 +286,8 @@ class AddTeacherRooms extends Component {
     return data.name;
   };
 
-  renderCells = (cellInfo) => {
+  renderCells = (cellInfo) =>
+  {
     const { timeTableData } = this.state;
     return (
       <div style={{ backgroundColor: '#fafafa' }}>
@@ -276,8 +301,9 @@ class AddTeacherRooms extends Component {
     );
   };
 
-  renderLi = () => {
-    const { data, teachers, rooms } = this.state;
+  renderLi = () =>
+  {
+    const { data, teachers, subjects } = this.state;
     const render = key => (
       <RenderData
         data={data}
@@ -289,13 +315,15 @@ class AddTeacherRooms extends Component {
       />
     );
 
-    if (data === 'teachers') {
+    if (data === 'teachers')
+    {
       return Object.keys(teachers).map(render);
     }
-    return Object.keys(rooms).map(render);
+    return Object.keys(subjects).map(render);
   };
 
-  render() {
+  render()
+  {
     const { data, dialogOpen, timeTableData } = this.state;
     const { classes } = this.props;
     return (
@@ -347,7 +375,7 @@ class AddTeacherRooms extends Component {
   }
 }
 
-const styleSheet = createStyleSheet('AddTeachersRooms', {
+const styleSheet = createStyleSheet('AddTeacherssubjects', {
   appBar: {
     position: 'relative',
     backgroundColor: colors.pinkDark,
@@ -358,9 +386,9 @@ const styleSheet = createStyleSheet('AddTeachersRooms', {
   },
 });
 
-AddTeacherRooms.propTypes = {
+AddDetails.propTypes = {
   classes: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
 
-export default withStyles(styleSheet)(AddTeacherRooms);
+export default withStyles(styleSheet)(AddDetails);

@@ -2,18 +2,22 @@
   border-left: 1px solid black;
   border-top: 1px solid black;
 }
-
 .rt-resizable-header:nth-child(1),
 .rt-resizable-header:nth-child(2),
-.rt-resizable-header:nth-child(3) {
-  border-right: 1px solid black!important;
-}
-
+.rt-resizable-header:nth-child(3),
+.rt-resizable-header:nth-child(4),
 .rt-resizable-header:nth-child(5),
 .rt-resizable-header:nth-child(6),
-.rt-resizable-header:nth-child(7) {
-  border-left: 1px solid black!important;
+.rt-resizable-header:nth-child(7),
+.rt-resizable-header:nth-child(8),
+.rt-resizable-header:nth-child(9),
+.rt-resizable-header:nth-child(10),
+.rt-resizable-header:nth-child(11){
+
+  border-right : 1px solid black !important;
+
 }
+
 
 .rt-tr {
   border-bottom: 1px solid black;

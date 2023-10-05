@@ -8,7 +8,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 // import IconButton from 'material-ui/IconButton';
 import Home from 'material-ui-icons/Home';
-import AccessTime from 'material-ui-icons/AccessTime';
+import { AccessTime } from 'material-ui-icons';
 import Settings from 'material-ui-icons/Settings';
 import colors from './../../colors';
 

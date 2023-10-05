@@ -14,7 +14,7 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 import 'react-table/react-table.css';
-
+import "./style.css";
 import TimeTablelList from './TimeTableList';
 import colors from './../../colors';
 import base from '../../re-base';
@@ -30,6 +30,7 @@ class SavedTimeTables extends Component {
     this.renderCells = this.renderCells.bind(this);
     this.edit = this.edit.bind(this);
     this.delete = this.delete.bind(this);
+    this.renderDay = this.renderDay.bind(this);
 
     this.state = {
       data: [{}],
@@ -39,38 +40,58 @@ class SavedTimeTables extends Component {
 
     this.columns = [
       {
-        Header: '1st',
+        Header: 'Day/Time',
+        accessor: 'sl0',
+        Cell: this.renderDay,
+      },
+      {
+        Header: '07:00 - 07:45',
         accessor: 'sl1',
         Cell: this.renderCells,
       },
       {
-        Header: '2nd',
+        Header: '07:55 - 08:55',
         accessor: 'sl2',
         Cell: this.renderCells,
       },
       {
-        Header: '3rd',
+        Header: '09:15 - 10:05',
         accessor: 'sl3',
         Cell: this.renderCells,
       },
       {
-        Header: '4th',
+        Header: '10:10 - 11:00',
         accessor: 'sl4',
         Cell: this.renderCells,
       },
       {
-        Header: '5th',
+        Header: '11:05 - 11:55',
         accessor: 'sl5',
         Cell: this.renderCells,
       },
       {
-        Header: '6th',
+        Header: '12:00 - 12:50',
         accessor: 'sl6',
         Cell: this.renderCells,
       },
       {
-        Header: '7th',
+        Header: '12:50 - 01:50',
         accessor: 'sl7',
+        Cell: this.renderCells,
+      },
+      {
+        Header: '01:50 - 02:40',
+        accessor: 'sl8',
+        Cell: this.renderCells,
+      },
+      {
+        Header: '02:45 - 03:35',
+        accessor: 'sl9',
+        Cell: this.renderCells,
+      },
+      {
+        Header: '03:40 - 04:30',
+        accessor: 'sl10',
         Cell: this.renderCells,
       },
     ];
@@ -78,6 +99,15 @@ class SavedTimeTables extends Component {
 
   componentWillMount() {
     this.fetchTimeTables();
+  }
+
+  renderDay(cellInfo)
+  {
+    const { data, index } = this.state;
+    return (      
+      <div style={{ backgroundColor: '#fafafa', padding: "50px 0" }}>{data[index].data[cellInfo.index][cellInfo.column.id]}</div>
+
+    );
   }
 
   fetchTimeTables() {
@@ -185,8 +215,9 @@ class SavedTimeTables extends Component {
                 </Typography>
               </Paper>
 
-              <div className="table-wrap" style={{ margin: '20px' }}>
+              <div className="table-wrap" style={{ margin: '0 100px 20px 100px ' }}>
                 <ReactTable
+                  stickyHeader
                   data={data[index].data}
                   columns={this.columns}
                   defaultPageSize={6}

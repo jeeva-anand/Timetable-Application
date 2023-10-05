@@ -6,7 +6,7 @@
 &nbsp;&nbsp;
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/vigzmv/timetable-generator)
 
-Auto timetable generator from list of Teachers, Classes and rooms.
+Auto timetable generator from list of Teachers, Classes and subjects.
 
 Built Using:
 
