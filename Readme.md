@@ -19,7 +19,7 @@ Built Using:
 ## Live Demo
 
 Check out the live demo
-[Here: https://vigneshm.com/timetable-generator/](https://vigneshm.com/timetable-generator/)
+<!-- [Here: https://vigneshm.com/timetable-generator/](https://vigneshm.com/timetable-generator/) -->
 
 <hr>
 
