@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import Paper from "material-ui/Paper";
+import Tabs, { Tab } from "material-ui/Tabs";
+import { withRouter } from "react-router-dom";
 
-const getPathIndex = (path) =>
-{
-  const paths = ['addnew', 'saved', 'teachers', 'subjects'];
+const getPathIndex = (path) => {
+  const paths = ["addnew", "saved", "teachers", "subjects"];
   return paths.indexOf(path.slice(1));
 };
 
-class Navbar extends Component
-{
-  constructor(props)
-  {
+class Navbar extends Component {
+  constructor(props) {
     super(props);
 
     this.path = props.location.pathname;
@@ -21,34 +18,31 @@ class Navbar extends Component
     };
   }
 
-  handleChange = (event, index) =>
-  {
+  handleChange = (event, index) => {
     this.setState({ index });
 
     const { history } = this.props;
-    switch (index)
-    {
+    switch (index) {
       case 0:
-        history.push(`${ process.env.PUBLIC_URL }/addnew`);
+        history.push(`${process.env.PUBLIC_URL}/addnew`);
         break;
       case 1:
-        history.push(`${ process.env.PUBLIC_URL }/saved`);
+        history.push(`${process.env.PUBLIC_URL}/saved`);
         break;
       case 2:
-        history.push(`${ process.env.PUBLIC_URL }/teachers`);
+        history.push(`${process.env.PUBLIC_URL}/teachers`);
         break;
       case 3:
-        history.push(`${ process.env.PUBLIC_URL }/subject`);
+        history.push(`${process.env.PUBLIC_URL}/subjects`);
         break;
       default:
         break;
     }
   };
 
-  render()
-  {
+  render() {
     return (
-      <Paper style={{ width: '100%' }} elevation={3} square>
+      <Paper style={{ width: "100%" }} elevation={3} square>
         <Tabs
           index={this.state.index}
           onChange={this.handleChange}

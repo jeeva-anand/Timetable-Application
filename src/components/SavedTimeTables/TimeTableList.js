@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import List, { ListItem, ListItemText } from "material-ui/List";
+import Divider from "material-ui/Divider";
 
 class TimeTablelList extends Component {
   render() {

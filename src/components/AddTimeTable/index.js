@@ -1,3 +1,3 @@
-import AddTimeTable from './AddTimeTable';
+import AddTimeTable from "./AddTimeTable";
 
 export default AddTimeTable;

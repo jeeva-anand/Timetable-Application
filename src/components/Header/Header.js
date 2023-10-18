@@ -1,18 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { withStyles, createStyleSheet } from "material-ui/styles";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import Button from "material-ui/Button";
 // import IconButton from 'material-ui/IconButton';
-import Home from 'material-ui-icons/Home';
-import { AccessTime } from 'material-ui-icons';
-import Settings from 'material-ui-icons/Settings';
-import colors from './../../colors';
+import Home from "material-ui-icons/Home";
+import { AccessTime } from "material-ui-icons";
+import Settings from "material-ui-icons/Settings";
+import colors from "./../../colors";
 
-const styleSheet = createStyleSheet('Header', {
+const styleSheet = createStyleSheet("Header", {
   header: {
     backgroundColor: colors.blueGreyDarkest,
   },
@@ -26,7 +26,7 @@ const styleSheet = createStyleSheet('Header', {
     width: 23,
   },
   root: {
-    width: '100%',
+    width: "100%",
   },
   bar: {
     height: 70,
@@ -41,7 +41,7 @@ const styleSheet = createStyleSheet('Header', {
   settings: {
     color: colors.blueGreyLighter,
     fontSize: 19,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
 });
 
@@ -51,7 +51,10 @@ function Header(props) {
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar className={classes.bar}>
-          <Link to={`${process.env.PUBLIC_URL}/`} style={{ textDecoration: 'none' }}>
+          <Link
+            to={`${process.env.PUBLIC_URL}/`}
+            style={{ textDecoration: "none" }}
+          >
             <Button>
               <Home className={classes.icon} aria-label="home" />
               <Typography type="caption" className={classes.settings}>
@@ -60,7 +63,12 @@ function Header(props) {
             </Button>
           </Link>
 
-          <Typography color="inherit" className={classes.title} gutterBottom align="center">
+          <Typography
+            color="inherit"
+            className={classes.title}
+            gutterBottom
+            align="center"
+          >
             <AccessTime className={classes.time} />
             &nbsp;Time Table Generator
           </Typography>

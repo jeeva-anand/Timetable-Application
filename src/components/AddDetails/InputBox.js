@@ -1,51 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "material-ui/Button";
 
-class InputBox extends React.Component
-{
-  constructor()
-  {
+class InputBox extends React.Component {
+  constructor() {
     super();
     this.createData = this.createData.bind(this);
   }
 
-  createData(event)
-  {
+  createData(event) {
     event.preventDefault();
     const data = {
       name: this.name.value,
     };
-    if (this.props.data === 'teachers')
-    {
+    if (this.props.data === "teachers") {
       this.props.addTeacher(data);
-    } else
-    {
+    } else {
       this.props.addRoom(data);
     }
     this.inputForm.reset();
   }
 
-  render()
-  {
+  render() {
     let placeholderValue;
-    if (this.props.data === 'subjects')
-    {
-      placeholderValue = 'Enter Room number';
-    } else
-    {
+    if (this.props.data === "subjects") {
+      placeholderValue = "Enter Room number";
+    } else {
       placeholderValue = "Enter Teacher's name";
     }
 
     return (
-      <form ref={input => (this.inputForm = input)} onSubmit={this.createData}>
+      <form
+        ref={(input) => (this.inputForm = input)}
+        onSubmit={this.createData}
+      >
         <input
-          style={{ width: '50%', marginLeft: 50 }}
-          ref={input => (this.name = input)}
+          style={{ width: "60%", height: "2rem", marginLeft: 48, borderRadius: 8, borderWidth: "1px"}}
+          ref={(input) => (this.name = input)}
           type="text"
           label={placeholderValue}
         />
-        <Button style={{ marginLeft: 10 }} raised type="submit" color="accent">
+        <Button style={{ marginLeft: 16 }} raised type="submit" color="accent">
           Add
         </Button>
       </form>

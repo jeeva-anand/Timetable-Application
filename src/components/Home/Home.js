@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import ComponentWrappers from '../../ComponentWrappers';
 import {
-  Welcome,
+  AddDetails,
+  AddTimeTable,
   Header,
   Navbar,
-  AddTimeTable,
-  AddDetails,
   SavedTimeTables,
+  Welcome,
 } from '../../components/';
-import ComponentWrappers from '../../ComponentWrappers';
 
 class Home extends Component {
   render() {
@@ -19,8 +19,8 @@ class Home extends Component {
         <Route exact path={`${process.env.PUBLIC_URL}/addnew`} component={AddTimeTable} />
         <Route exact path={`${process.env.PUBLIC_URL}/addnew/:key`} component={AddTimeTable} />
         <Route exact path={`${process.env.PUBLIC_URL}/saved`} component={SavedTimeTables} />
-        <Route exact path={`${ process.env.PUBLIC_URL }/teachers`} component={AddDetails} />
-        <Route exact path={`${ process.env.PUBLIC_URL }/subject`} component={AddDetails} />
+        <Route exact path={`${process.env.PUBLIC_URL}/teachers`} component={AddDetails} />
+        <Route exact path={`${process.env.PUBLIC_URL}/subjects`} component={AddDetails} />
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={Welcome} />
       </div>
     );

@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
-import Card, { CardContent } from 'material-ui/Card';
-import List from 'material-ui/List';
-import Dialog from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import CloseIcon from "material-ui-icons/Close";
+import AppBar from "material-ui/AppBar";
+import Card, { CardContent } from "material-ui/Card";
+import Dialog from "material-ui/Dialog";
+import IconButton from "material-ui/IconButton";
+import List from "material-ui/List";
+import Paper from "material-ui/Paper";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import { createStyleSheet, withStyles } from "material-ui/styles";
+import Slide from "material-ui/transitions/Slide";
 
-import RenderData from './RenderData';
-import InputBox from './InputBox';
-import base from '../../re-base';
-import colors from '../../colors';
-import './../AddTimeTable/react-table.css';
-import { emptyStarterTimeTable } from '../../constants';
+import colors from "../../colors";
+import { emptyStarterTimeTable } from "../../constants";
+import base from "../../re-base";
+import "./../AddTimeTable/react-table.css";
+import InputBox from "./InputBox";
+import RenderData from "./RenderData";
 
-class AddDetails extends Component
-{
-  constructor(props)
-  {
+class AddDetails extends Component {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -39,59 +37,72 @@ class AddDetails extends Component
 
     this.columns = [
       {
-        Header: '1st',
-        accessor: 'sl1',
+        Header: "1st",
+        accessor: "sl1",
         Cell: this.renderCells,
       },
       {
-        Header: '2nd',
-        accessor: 'sl2',
+        Header: "2nd",
+        accessor: "sl2",
         Cell: this.renderCells,
       },
       {
-        Header: '3rd',
-        accessor: 'sl3',
+        Header: "3rd",
+        accessor: "sl3",
         Cell: this.renderCells,
       },
       {
-        Header: '4th',
-        accessor: 'sl4',
+        Header: "4th",
+        accessor: "sl4",
         Cell: this.renderCells,
       },
       {
-        Header: '5th',
-        accessor: 'sl5',
+        Header: "5th",
+        accessor: "sl5",
         Cell: this.renderCells,
       },
       {
-        Header: '6th',
-        accessor: 'sl6',
+        Header: "6th",
+        accessor: "sl6",
         Cell: this.renderCells,
       },
       {
-        Header: '7th',
-        accessor: 'sl7',
+        Header: "7th",
+        accessor: "sl7",
+        Cell: this.renderCells,
+      },
+      {
+        Header: "8th",
+        accessor: "sl8",
+        Cell: this.renderCells,
+      },
+      {
+        Header: "9th",
+        accessor: "sl9",
+        Cell: this.renderCells,
+      },
+      {
+        Header: "10th",
+        accessor: "sl10",
         Cell: this.renderCells,
       },
     ];
   }
 
-  componentWillMount = () =>
-  {
-    this.ref1 = base.syncState('teachers', {
+  componentWillMount = () => {
+    this.ref1 = base.syncState("teachers", {
       context: this,
-      state: 'teachers',
+      state: "teachers",
     });
 
-    this.ref2 = base.syncState('subjects', {
+    this.ref2 = base.syncState("subjects", {
       context: this,
-      state: 'subjects',
+      state: "subjects",
     });
 
-    const localStorageRef = localStorage.getItem('data');
+    const localStorageRef = localStorage.getItem("data");
 
-    if (localStorageRef)
-    {
+    if (localStorageRef) {
       this.setState({
         teachers: JSON.parse(localStorageRef).teachers,
         subjects: JSON.parse(localStorageRef).subjects,
@@ -99,142 +110,148 @@ class AddDetails extends Component
     }
   };
 
-  componentWillUpdate = (nextProps, nextState) =>
-  {
-    localStorage.setItem('data', JSON.stringify(nextState));
+  componentWillUpdate = (nextProps, nextState) => {
+    localStorage.setItem("data", JSON.stringify(nextState));
   };
 
-  componentWillUnmount = () =>
-  {
+  componentWillUnmount = () => {
     base.removeBinding(this.ref1.endpoint);
     base.removeBinding(this.ref2.endpoint);
   };
 
-  addTeacher = (data) =>
-  {
+  addTeacher = (data) => {
     const teachers = { ...this.state.teachers };
-    teachers[`teacher-${ Date.now() }`] = data;
+    teachers[`teacher-${Date.now()}`] = data;
     this.setState({ teachers });
   };
 
-  addRoom = (data) =>
-  {
+  addRoom = (data) => {
     const subjects = { ...this.state.subjects };
-    subjects[`room-${ Date.now() }`] = data;
+    subjects[`room-${Date.now()}`] = data;
     this.setState({ subjects });
   };
 
-  removeData = (key) =>
-  {
-    if (this.state.data === 'teachers')
-    {
+  removeData = (key) => {
+    if (this.state.data === "teachers") {
       this.removeTeacher(key);
-    } else
-    {
+    } else {
       this.removeRoom(key);
     }
   };
 
-  removeTeacher = (key) =>
-  {
+  removeTeacher = (key) => {
     const teachers = { ...this.state.teachers };
     teachers[key] = null;
     this.setState({ teachers });
   };
 
-  removeRoom = (key) =>
-  {
+  removeRoom = (key) => {
     const subjects = { ...this.state.subjects };
     subjects[key] = null;
     this.setState({ subjects });
   };
 
-  generateTT = (item, name) =>
-  {
-    const selector = item === 'teachers' ? 1 : 2;
-    const selector2 = item === 'teachers' ? 2 : 1;
+  generateTT = (item, name) => {
+    const selector = item === "teachers" ? 1 : 2;
+    const selector2 = item === "teachers" ? 2 : 1;
 
     base
-      .fetch('timeTables', {
+      .fetch("timeTables", {
         context: this,
         asArray: true,
       })
-      .then((data) =>
-      {
+      .then((data) => {
         const generatedTT = [
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
           {
-            sl1: ['', '', ''],
-            sl2: ['', '', ''],
-            sl3: ['', '', ''],
-            sl4: ['', '', ''],
-            sl5: ['', '', ''],
-            sl6: ['', '', ''],
-            sl7: ['', '', ''],
+            sl1: ["", "", ""],
+            sl2: ["", "", ""],
+            sl3: ["", "", ""],
+            sl4: ["", "", ""],
+            sl5: ["", "", ""],
+            sl6: ["", "", ""],
+            sl7: ["", "", ""],
+            sl8: ["", "", ""],
+            sl9: ["", "", ""],
+            sl10: ["", "", ""],
           },
         ];
 
-        data.forEach((timeTable) =>
-        {
-          timeTable.data.forEach((row, index) =>
-          {
-            Object.keys(row).forEach((keys) =>
-            {
-              if (row[keys][selector] === name)
-              {
+        data.forEach((timeTable) => {
+          timeTable.data.forEach((row, index) => {
+            Object.keys(row).forEach((keys) => {
+              if (row[keys][selector] === name) {
                 generatedTT[index][keys] = [
                   timeTable.classInfo,
                   row[keys][0],
@@ -253,58 +270,57 @@ class AddDetails extends Component
       });
   };
 
-  dialogOpen = (index) =>
-  {
+  dialogOpen = (index) => {
     this.generateTT(this.state.data, this.state[this.state.data][index].name);
   };
 
-  dialogClose = () =>
-  {
+  dialogClose = () => {
     this.setState({ dialogOpen: false });
   };
 
   paperTitle = () =>
-  (this.state.data === 'teachers'
-    ? `Teacher's Name: ${ this.state.index }`
-    : `Room Number: ${ this.state.index }`);
+    this.state.data === "teachers"
+      ? `Teacher's Name: ${this.state.index}`
+      : `Room Number: ${this.state.index}`;
 
-  name = () =>
-  {
+  name = () => {
     let data;
     const { teachers, subjects, index } = this.state;
     const value = this.state.data;
-    if (value === 'teachers')
-    {
+    if (value === "teachers") {
       data = teachers[index];
-    } else
-    {
+    } else {
       data = subjects[index];
     }
     data = data || {
-      name: '',
+      name: "",
     };
     return data.name;
   };
 
-  renderCells = (cellInfo) =>
-  {
+  renderCells = (cellInfo) => {
     const { timeTableData } = this.state;
     return (
-      <div style={{ backgroundColor: '#fafafa' }}>
-        <div>{timeTableData[cellInfo.index][cellInfo.column.id][0] || 'Not Set'}</div>
+      <div style={{ backgroundColor: "#fafafa" }}>
+        <div>
+          {timeTableData[cellInfo.index][cellInfo.column.id][0] || "Not Set"}
+        </div>
         <br />
-        <div>{timeTableData[cellInfo.index][cellInfo.column.id][1] || 'Not Set'}</div>
+        <div>
+          {timeTableData[cellInfo.index][cellInfo.column.id][1] || "Not Set"}
+        </div>
         <br />
-        <div>{timeTableData[cellInfo.index][cellInfo.column.id][2] || 'Not Set'}</div>
+        <div>
+          {timeTableData[cellInfo.index][cellInfo.column.id][2] || "Not Set"}
+        </div>
         <br />
       </div>
     );
   };
 
-  renderLi = () =>
-  {
+  renderLi = () => {
     const { data, teachers, subjects } = this.state;
-    const render = key => (
+    const render = (key) => (
       <RenderData
         data={data}
         key={key}
@@ -315,26 +331,28 @@ class AddDetails extends Component
       />
     );
 
-    if (data === 'teachers')
-    {
+    if (data === "teachers") {
       return Object.keys(teachers).map(render);
     }
     return Object.keys(subjects).map(render);
   };
 
-  render()
-  {
+  render() {
     const { data, dialogOpen, timeTableData } = this.state;
     const { classes } = this.props;
     return (
       <div>
-        <Card style={{ width: '35%', margin: 20, marginLeft: '32.5%' }}>
+        <Card style={{ width: "35%", margin: 20, marginLeft: "32.5%" }}>
           <CardContent>
-            <Typography type="display2" style={{ marginLeft: '30%' }}>
+            <Typography type="display2" style={{ marginLeft: "30%" }}>
               {data}
             </Typography>
             <hr />
-            <InputBox addTeacher={this.addTeacher} addRoom={this.addRoom} data={data} />
+            <InputBox
+              addTeacher={this.addTeacher}
+              addRoom={this.addRoom}
+              data={data}
+            />
             <List style={{ margin: 20 }}>{this.renderLi()}</List>
           </CardContent>
         </Card>
@@ -347,20 +365,28 @@ class AddDetails extends Component
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="contrast" onClick={this.dialogClose} aria-label="Close">
+              <IconButton
+                color="contrast"
+                onClick={this.dialogClose}
+                aria-label="Close"
+              >
                 <CloseIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
 
-          <Paper style={{ margin: '20px', padding: '20px' }} elevation={2} square>
+          <Paper
+            style={{ margin: "20px", padding: "20px" }}
+            elevation={2}
+            square
+          >
             <Typography type="title">
               {this.paperTitle()}
               <span className={classes.ttinfo}> {this.name()}</span>
             </Typography>
           </Paper>
 
-          <div className="table-wrap" style={{ margin: '20px' }}>
+          <div className="table-wrap" style={{ margin: "20px" }}>
             <ReactTable
               data={timeTableData}
               columns={this.columns}
@@ -375,14 +401,14 @@ class AddDetails extends Component
   }
 }
 
-const styleSheet = createStyleSheet('AddTeacherssubjects', {
+const styleSheet = createStyleSheet("AddTeacherssubjects", {
   appBar: {
-    position: 'relative',
+    position: "relative",
     backgroundColor: colors.pinkDark,
   },
   ttinfo: {
-    color: 'grey',
-    paddingRight: '250px',
+    color: "grey",
+    paddingRight: "250px",
   },
 });
 

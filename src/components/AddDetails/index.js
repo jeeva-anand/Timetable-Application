@@ -1,3 +1,3 @@
-import AddDetails from './AddDetails';
+import AddDetails from "./AddDetails";
 
 export default AddDetails;

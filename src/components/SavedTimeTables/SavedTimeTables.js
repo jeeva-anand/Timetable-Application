@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import ReactTable from 'react-table';
-import Typography from 'material-ui/Typography';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
-import Dialog from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
-import Slide from 'material-ui/transitions/Slide';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
-import 'react-table/react-table.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import ReactTable from "react-table";
+import Typography from "material-ui/Typography";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
+import { createStyleSheet, withStyles } from "material-ui/styles";
+import Dialog from "material-ui/Dialog";
+import Button from "material-ui/Button";
+import Slide from "material-ui/transitions/Slide";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import IconButton from "material-ui/IconButton";
+import CloseIcon from "material-ui-icons/Close";
+import "react-table/react-table.css";
 import "./style.css";
-import TimeTablelList from './TimeTableList';
-import colors from './../../colors';
-import base from '../../re-base';
-import './../AddTimeTable/react-table.css';
+import TimeTablelList from "./TimeTableList";
+import colors from "./../../colors";
+import base from "../../re-base";
+import "./../AddTimeTable/react-table.css";
 
 class SavedTimeTables extends Component {
   constructor() {
@@ -40,58 +40,58 @@ class SavedTimeTables extends Component {
 
     this.columns = [
       {
-        Header: 'Day/Time',
-        accessor: 'sl0',
+        Header: "Day/Time",
+        accessor: "sl0",
         Cell: this.renderDay,
       },
       {
-        Header: '07:00 - 07:45',
-        accessor: 'sl1',
+        Header: "07:00 - 07:45",
+        accessor: "sl1",
         Cell: this.renderCells,
       },
       {
-        Header: '07:55 - 08:55',
-        accessor: 'sl2',
+        Header: "07:55 - 08:55",
+        accessor: "sl2",
         Cell: this.renderCells,
       },
       {
-        Header: '09:15 - 10:05',
-        accessor: 'sl3',
+        Header: "09:15 - 10:05",
+        accessor: "sl3",
         Cell: this.renderCells,
       },
       {
-        Header: '10:10 - 11:00',
-        accessor: 'sl4',
+        Header: "10:10 - 11:00",
+        accessor: "sl4",
         Cell: this.renderCells,
       },
       {
-        Header: '11:05 - 11:55',
-        accessor: 'sl5',
+        Header: "11:05 - 11:55",
+        accessor: "sl5",
         Cell: this.renderCells,
       },
       {
-        Header: '12:00 - 12:50',
-        accessor: 'sl6',
+        Header: "12:00 - 12:50",
+        accessor: "sl6",
         Cell: this.renderCells,
       },
       {
-        Header: '12:50 - 01:50',
-        accessor: 'sl7',
+        Header: "12:50 - 01:50",
+        accessor: "sl7",
         Cell: this.renderCells,
       },
       {
-        Header: '01:50 - 02:40',
-        accessor: 'sl8',
+        Header: "01:50 - 02:40",
+        accessor: "sl8",
         Cell: this.renderCells,
       },
       {
-        Header: '02:45 - 03:35',
-        accessor: 'sl9',
+        Header: "02:45 - 03:35",
+        accessor: "sl9",
         Cell: this.renderCells,
       },
       {
-        Header: '03:40 - 04:30',
-        accessor: 'sl10',
+        Header: "03:40 - 04:30",
+        accessor: "sl10",
         Cell: this.renderCells,
       },
     ];
@@ -101,18 +101,18 @@ class SavedTimeTables extends Component {
     this.fetchTimeTables();
   }
 
-  renderDay(cellInfo)
-  {
+  renderDay(cellInfo) {
     const { data, index } = this.state;
-    return (      
-      <div style={{ backgroundColor: '#fafafa', padding: "50px 0" }}>{data[index].data[cellInfo.index][cellInfo.column.id]}</div>
-
+    return (
+      <div style={{ backgroundColor: "#fafafa", padding: "50px 0" }}>
+        {data[index].data[cellInfo.index][cellInfo.column.id]}
+      </div>
     );
   }
 
   fetchTimeTables() {
     base
-      .fetch('timeTables', {
+      .fetch("timeTables", {
         context: this,
         asArray: true,
       })
@@ -144,8 +144,9 @@ class SavedTimeTables extends Component {
       .remove(`timeTables/${data[index].key}`)
       .then(() => {
         this.dialogClose();
-        this.props.history.push('/saved');
+        this.props.history.push("/saved");
         this.forceUpdate();
+        this.render();
       })
       .catch((error) => {
         window.console.log(error);
@@ -155,12 +156,18 @@ class SavedTimeTables extends Component {
   renderCells(cellInfo) {
     const { data, index } = this.state;
     return (
-      <div style={{ backgroundColor: '#fafafa' }}>
-        <div>{data[index].data[cellInfo.index][cellInfo.column.id][0] || 'Not Set'}</div>
+      <div style={{ backgroundColor: "#fafafa" }}>
+        <div>
+          {data[index].data[cellInfo.index][cellInfo.column.id][0] || "Not Set"}
+        </div>
         <br />
-        <div>{data[index].data[cellInfo.index][cellInfo.column.id][1] || 'Not Set'}</div>
+        <div>
+          {data[index].data[cellInfo.index][cellInfo.column.id][1] || "Not Set"}
+        </div>
         <br />
-        <div>{data[index].data[cellInfo.index][cellInfo.column.id][2] || 'Not Set'}</div>
+        <div>
+          {data[index].data[cellInfo.index][cellInfo.column.id][2] || "Not Set"}
+        </div>
         <br />
       </div>
     );
@@ -187,16 +194,30 @@ class SavedTimeTables extends Component {
             >
               <AppBar className={classes.appBar}>
                 <Toolbar>
-                  <IconButton color="contrast" onClick={this.dialogClose} aria-label="Close">
+                  <IconButton
+                    color="contrast"
+                    onClick={this.dialogClose}
+                    aria-label="Close"
+                  >
                     <CloseIcon />
                   </IconButton>
                   <div className={classes.flex} />
-                  <Button raised color="primary" className={classes.button} onClick={this.edit}>
+                  <Button
+                    raised
+                    color="primary"
+                    className={classes.button}
+                    onClick={this.edit}
+                  >
                     <Typography type="caption" className={classes.settings}>
                       &nbsp;Edit
                     </Typography>
                   </Button>
-                  <Button raised color="accent" className={classes.button} onClick={this.delete}>
+                  <Button
+                    raised
+                    color="accent"
+                    className={classes.button}
+                    onClick={this.delete}
+                  >
                     <Typography type="caption" className={classes.settings}>
                       &nbsp;Delete
                     </Typography>
@@ -204,18 +225,31 @@ class SavedTimeTables extends Component {
                 </Toolbar>
               </AppBar>
 
-              <Paper style={{ margin: '20px', padding: '20px' }} elevation={2} square>
+              <Paper
+                style={{ margin: "20px", padding: "20px" }}
+                elevation={2}
+                square
+              >
                 <Typography type="title">
                   Class:
-                  <span className={classes.ttinfo}> {data[index].classInfo}</span>
+                  <span className={classes.ttinfo}>
+                    {" "}
+                    {data[index].classInfo}
+                  </span>
                   Semester:
-                  <span className={classes.ttinfo}> {data[index].semester}</span>
+                  <span className={classes.ttinfo}>
+                    {" "}
+                    {data[index].semester}
+                  </span>
                   Shift:
                   <span className={classes.ttinfo}> {data[index].shift}</span>
                 </Typography>
               </Paper>
 
-              <div className="table-wrap" style={{ margin: '0 100px 20px 100px ' }}>
+              <div
+                className="table-wrap"
+                style={{ margin: "0 100px 20px 100px " }}
+              >
                 <ReactTable
                   stickyHeader
                   data={data[index].data}
@@ -233,16 +267,16 @@ class SavedTimeTables extends Component {
   }
 }
 
-const styleSheet = createStyleSheet('SavedTimeTables', theme => ({
+const styleSheet = createStyleSheet("SavedTimeTables", (theme) => ({
   title: {
     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
   },
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   appBar: {
-    position: 'relative',
+    position: "relative",
     backgroundColor: colors.pinkDark,
   },
   flex: {
@@ -254,11 +288,11 @@ const styleSheet = createStyleSheet('SavedTimeTables', theme => ({
   settings: {
     color: colors.blueGreyLighter,
     fontSize: 19,
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
   ttinfo: {
-    color: 'grey',
-    paddingRight: '250px',
+    color: "grey",
+    paddingRight: "250px",
   },
 }));
 
