@@ -246,7 +246,6 @@ class SavedTimeTables extends Component {
 
               <div
                 className={classes.tableWrap}
-                style={{ margin: "24px 10%" }}
               >
                 <ReactTable
                   data={data[index].data}
@@ -295,6 +294,7 @@ const styleSheet = createStyleSheet("SavedTimeTables", (theme) => ({
     MsOverflowStyle: "none", /* IE and Edge */
     scrollbarWidth: "none", /* Firefox */
     overflowY: "scroll",
+    margin: "24px 8%",
   }
 }));
 
