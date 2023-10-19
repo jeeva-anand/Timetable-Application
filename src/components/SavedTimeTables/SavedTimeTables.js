@@ -1,24 +1,23 @@
-import React, { Component } from "react";
+import CloseIcon from "material-ui-icons/Close";
+import AppBar from "material-ui/AppBar";
+import Button from "material-ui/Button";
+import Dialog from "material-ui/Dialog";
+import Grid from "material-ui/Grid";
+import IconButton from "material-ui/IconButton";
+import Paper from "material-ui/Paper";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import { createStyleSheet, withStyles } from "material-ui/styles";
+import Slide from "material-ui/transitions/Slide";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import ReactTable from "react-table";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import Grid from "material-ui/Grid";
-import { createStyleSheet, withStyles } from "material-ui/styles";
-import Dialog from "material-ui/Dialog";
-import Button from "material-ui/Button";
-import Slide from "material-ui/transitions/Slide";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import IconButton from "material-ui/IconButton";
-import CloseIcon from "material-ui-icons/Close";
 import "react-table/react-table.css";
-import "./style.css";
-import TimeTablelList from "./TimeTableList";
-import colors from "./../../colors";
 import base from "../../re-base";
+import colors from "./../../colors";
 import "./../AddTimeTable/react-table.css";
+import TimeTablelList from "./TimeTableList";
 
 class SavedTimeTables extends Component {
   constructor() {
@@ -104,9 +103,9 @@ class SavedTimeTables extends Component {
   renderDay(cellInfo) {
     const { data, index } = this.state;
     return (
-      <div style={{ backgroundColor: "#fafafa", padding: "50px 0" }}>
+      <Typography style={{ backgroundColor: "#fafafa", padding: "24px 0" }}>
         {data[index].data[cellInfo.index][cellInfo.column.id]}
-      </div>
+      </Typography>
     );
   }
 
@@ -157,17 +156,13 @@ class SavedTimeTables extends Component {
     const { data, index } = this.state;
     return (
       <div style={{ backgroundColor: "#fafafa" }}>
-        <div>
-          {data[index].data[cellInfo.index][cellInfo.column.id][0] || "Not Set"}
-        </div>
+        <Typography type="body2">
+          {data[index].data[cellInfo.index][cellInfo.column.id][2] || "No Subject"}
+        </Typography>
         <br />
-        <div>
-          {data[index].data[cellInfo.index][cellInfo.column.id][1] || "Not Set"}
-        </div>
-        <br />
-        <div>
-          {data[index].data[cellInfo.index][cellInfo.column.id][2] || "Not Set"}
-        </div>
+        <Typography type="body1">
+          {data[index].data[cellInfo.index][cellInfo.column.id][1] || "No Teacher"}
+        </Typography>
         <br />
       </div>
     );
@@ -226,7 +221,7 @@ class SavedTimeTables extends Component {
               </AppBar>
 
               <Paper
-                style={{ margin: "20px", padding: "20px" }}
+                style={{ margin: "24px", padding: "24px" }}
                 elevation={2}
                 square
               >
@@ -242,16 +237,18 @@ class SavedTimeTables extends Component {
                     {data[index].semester}
                   </span>
                   Shift:
-                  <span className={classes.ttinfo}> {data[index].shift}</span>
+                  <span className={classes.ttinfo}>
+                    {" "}
+                    {data[index].shift}
+                  </span>
                 </Typography>
               </Paper>
 
               <div
-                className="table-wrap"
-                style={{ margin: "0 100px 20px 100px " }}
+                className={classes.tableWrap}
+                style={{ margin: "24px 10%" }}
               >
                 <ReactTable
-                  stickyHeader
                   data={data[index].data}
                   columns={this.columns}
                   defaultPageSize={6}
@@ -277,7 +274,7 @@ const styleSheet = createStyleSheet("SavedTimeTables", (theme) => ({
   },
   appBar: {
     position: "relative",
-    backgroundColor: colors.pinkDark,
+    backgroundColor: colors.primaryDark,
   },
   flex: {
     flex: 1,
@@ -286,7 +283,7 @@ const styleSheet = createStyleSheet("SavedTimeTables", (theme) => ({
     margin: theme.spacing.unit,
   },
   settings: {
-    color: colors.blueGreyLighter,
+    color: colors.secondaryLighter,
     fontSize: 19,
     textTransform: "capitalize",
   },
@@ -294,6 +291,11 @@ const styleSheet = createStyleSheet("SavedTimeTables", (theme) => ({
     color: "grey",
     paddingRight: "250px",
   },
+  tableWrap: {
+    MsOverflowStyle: "none", /* IE and Edge */
+    scrollbarWidth: "none", /* Firefox */
+    overflowY: "scroll",
+  }
 }));
 
 SavedTimeTables.propTypes = {

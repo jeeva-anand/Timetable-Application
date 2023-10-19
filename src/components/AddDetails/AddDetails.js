@@ -404,7 +404,7 @@ class AddDetails extends Component {
 const styleSheet = createStyleSheet("AddTeacherssubjects", {
   appBar: {
     position: "relative",
-    backgroundColor: colors.pinkDark,
+    backgroundColor: colors.primaryDark,
   },
   ttinfo: {
     color: "grey",

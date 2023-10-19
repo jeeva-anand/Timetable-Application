@@ -1,9 +1,0 @@
-.table-wrap::-webkit-scrollbar {
-  display: none;
-}
-
-.table-wrap {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  overflow: scroll;
-}

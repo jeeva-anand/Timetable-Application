@@ -14,12 +14,12 @@ import colors from "./../../colors";
 
 const styleSheet = createStyleSheet("Header", {
   header: {
-    backgroundColor: colors.blueGreyDarkest,
+    backgroundColor: colors.secondaryDarkest,
   },
   icon: {
     height: 27,
     width: 27,
-    color: colors.blueGreyLighter,
+    color: colors.secondaryLighter,
   },
   time: {
     height: 23,
@@ -39,7 +39,7 @@ const styleSheet = createStyleSheet("Header", {
     letterSpacing: 1.4,
   },
   settings: {
-    color: colors.blueGreyLighter,
+    color: colors.secondaryLighter,
     fontSize: 19,
     textTransform: "capitalize",
   },

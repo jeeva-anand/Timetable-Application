@@ -6,7 +6,6 @@ import Divider from "material-ui/Divider";
 class TimeTablelList extends Component {
   render() {
     const { data, clickHandler } = this.props;
-    console.log(data[0]);
     if (Object.keys(data[0]).length === 0) {
       return (
         <List>
