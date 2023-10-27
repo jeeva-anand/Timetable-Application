@@ -1,6 +1,5 @@
 {
   "name": "timetable-generator",
-  "homepage": "http://vigzmv.github.io/timetable-generator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
