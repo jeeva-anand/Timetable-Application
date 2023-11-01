@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import List, { ListItem } from "material-ui/List";
+import Typography from "material-ui/Typography";
 import PropTypes from "prop-types";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import Divider from "material-ui/Divider";
+import React, { Component } from "react";
 
 class TimeTablelList extends Component {
   render() {
@@ -15,23 +15,20 @@ class TimeTablelList extends Component {
     }
 
     return (
-      <List>
+      <div style={{ display: "grid", columns: 4, gridAutoColumns: "auto", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
         {data.map(
           (item, index) => (
-            <div key={index} onClick={clickHandler.bind(this, index)}>
-              <ListItem button>
-                <ListItemText
-                  primary={`${item.classInfo} ${item.semester}`}
-                  secondary={`${item.shift} shift`}
-                />
-              </ListItem>
 
-              <Divider light />
-            </div>
+            <ListItem key={index} style={{ border: "1px solid lightgrey", borderRadius: 4, margin: 8, display: "block" }} button onClick={clickHandler.bind(this, index)}>
+              <Typography type="body2">{item.classInfo}</Typography>
+              <Typography type="body1">{item.shift} Shift</Typography>
+              <Typography type="body1">{item.semester} Semester</Typography>
+            </ListItem>
+
           ),
           this,
         )}
-      </List>
+      </div>
     );
   }
 }
