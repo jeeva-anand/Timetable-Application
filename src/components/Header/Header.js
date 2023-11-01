@@ -1,15 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { withStyles, createStyleSheet } from "material-ui/styles";
 import AppBar from "material-ui/AppBar";
+import Button from "material-ui/Button";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
+import { createStyleSheet, withStyles } from "material-ui/styles";
+import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router-dom";
 // import IconButton from 'material-ui/IconButton';
-import Home from "material-ui-icons/Home";
 import { AccessTime } from "material-ui-icons";
-import Settings from "material-ui-icons/Settings";
+import Home from "material-ui-icons/Home";
 import colors from "./../../colors";
 
 const styleSheet = createStyleSheet("Header", {
@@ -72,13 +71,6 @@ function Header(props) {
             <AccessTime className={classes.time} />
             &nbsp;Time Table Generator
           </Typography>
-
-          <Button>
-            <Settings className={classes.icon} aria-label="setting" />
-            <Typography type="caption" className={classes.settings}>
-              &nbsp;Settings
-            </Typography>
-          </Button>
         </Toolbar>
       </AppBar>
     </div>
