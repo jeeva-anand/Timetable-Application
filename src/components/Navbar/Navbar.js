@@ -4,7 +4,7 @@ import Tabs, { Tab } from "material-ui/Tabs";
 import { withRouter } from "react-router-dom";
 
 const getPathIndex = (path) => {
-  const paths = ["addnew", "saved", "teachers", "subjects"];
+  const paths = ["", "addnew", "saved", "teachers", "subjects"];
   return paths.indexOf(path.slice(1));
 };
 
@@ -51,7 +51,7 @@ class Navbar extends Component {
           textColor="accent"
           centered
         >
-          <Tab label="➕ Add TimeTable" />
+          <Tab label="Add TimeTable" />
           <Tab label="Saved TimeTables" />
           <Tab label="Saved Teachers" />
           <Tab label="Subjects" />
